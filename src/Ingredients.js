@@ -29,7 +29,7 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
 
 return (
   <div className="ingredient-wrap">
-    <h3>Choose From Ingredients you have at home...</h3>
+    <h5>Choose From Ingredients you have at home...</h5>
     <div className="ingredient-grid">
 
       {ingredients.map((ingredient) => {
@@ -41,7 +41,7 @@ return (
             onClick={() => handleClick(ingredient.id)}
             className={`ingredient-card ${isSelected ? "active" : ""}`}
           >
-            <h3>{ingredient.name}</h3>
+            <h6>{ingredient.name}</h6>
 
             <img
               className="image-ingredient"

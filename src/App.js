@@ -6,6 +6,10 @@ import { useEffect } from 'react';
 import { useState } from "react";
 import Ingredients from "./Ingredients";
 import RecipesContainer from './RecipesContainer';
+import FavoritesContainer from './FavoritesContainer';
+import Nav from "./Nav";
+import Footer from "./Footer";
+import IngredientForm from "./IngredientForm";
 
 function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -36,6 +40,7 @@ function App() {
  return res.json()
 }) 
 .then((json) => {
+  // let newRecipes = json.
   setRecipes(json)
   console.log(json)
 })
@@ -83,21 +88,25 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <header className="App-header">
+      
       <h1 className="title">Fork Friend</h1>
 
       <BrowserRouter>
+      <Nav></Nav>
       <Routes>
-        <Route path="/food" element={<FoodContainer></FoodContainer>}></Route>
+        {/* <Route path="/food" element={<FoodContainer></FoodContainer>}></Route> */}
+        <Route path="/addingredient" element={<IngredientForm></IngredientForm>}></Route> 
          <Route path="/" element={
           <div className="main-layout">
           <Ingredients getRecipes={getRecipes} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} ingredients={ingredients}></Ingredients>
+        
           <RecipesContainer favorites={favorites} setFavorites={setFavorites} recipes={recipes}></RecipesContainer>
+          <FavoritesContainer favorites={favorites} setFavorites={setFavorites}></FavoritesContainer>
           </div>
           }></Route>
       </Routes>
       </BrowserRouter>
-      </header>
+      <Footer></Footer>
     </div>
   );
 }
