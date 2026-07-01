@@ -6,6 +6,7 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
   console.log(ingredients)
     // const [selectedIngredients, setSelectedIngredients] = useState([])
     const [selected, setSelected] = useState([])
+    const [filter, setFilter] = useState("all")
    
     const getImage = (image) => {
         return `https://img.spoonacular.com/ingredients_100x100/${image}`
@@ -25,14 +26,39 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
          getRecipes(updatedIngredients)
     
     }
+
+    // function handleChange(e) {
+    //   console.log(e.target.value)
+    //   let filteredIng = ingredients.filter((ing) => ing.category === e.target.value)
+    // }
   
+    const categories = ingredients.map((ing) => ing.category)
+    const uniqcategories = [...new Set(categories)]
+    let filteredIng = ingredients.filter((ing) => {
+      if (filter === "all") {
+        return ing
+      }
+      return ing.category === filter
+    })
 
 return (
   <div className="ingredient-wrap">
     <h5>Choose From Ingredients you have at home...</h5>
+
+    <form onChange={(e) => setFilter(e.target.value)}>
+     <select>
+      <option value="all"></option>
+      {
+        
+        uniqcategories.map((cat) =>(
+          <option value={cat}>{cat}</option>
+        ))
+      }
+     </select>
+    </form>
     <div className="ingredient-grid">
 
-      {ingredients.map((ingredient) => {
+      {(filteredIng || ingredients).map((ingredient) => {
         const isSelected = selected.includes(ingredient.id);
 
         return (

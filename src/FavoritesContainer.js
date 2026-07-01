@@ -8,7 +8,7 @@ console.log(favorites)
 
     return (
         <div className="favorite-container">
-            <h3>Favorites Container</h3>
+            <h4>Favorites Container</h4>
             {
                 favorites.map((fav) => <Favorite setFavorites={setFavorites} favorites={favorites} key={fav.id} fav={fav}></Favorite>)
             }

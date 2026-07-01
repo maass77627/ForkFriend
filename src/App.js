@@ -1,7 +1,7 @@
 
 import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import FoodContainer from "./FoodContainer";
+import NutritionContainer from "./NutritionContainer";
 import { useEffect } from 'react';
 import { useState } from "react";
 import Ingredients from "./Ingredients";
@@ -18,7 +18,7 @@ function App() {
   const [recipeIngredients, setRecipeIngredients] = useState([])
   const [recipes, setRecipes] = useState([])
   const [favorites, setFavorites] = useState([])
-
+ const [nutrition, setNutrition] = useState([])
 
 // useEffect(() => {
   function getRecipes(ingredients) {
@@ -94,13 +94,16 @@ useEffect(() => {
       <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        {/* <Route path="/food" element={<FoodContainer></FoodContainer>}></Route> */}
-        <Route path="/addingredient" element={<IngredientForm></IngredientForm>}></Route> 
+        
+        <Route path="/addingredient" element={<IngredientForm setIngredients={setIngredients} ingredients={ingredients}></IngredientForm>}></Route> 
          <Route path="/" element={
           <div className="main-layout">
           <Ingredients getRecipes={getRecipes} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} ingredients={ingredients}></Ingredients>
         
-          <RecipesContainer favorites={favorites} setFavorites={setFavorites} recipes={recipes}></RecipesContainer>
+            <div className="main">
+          <RecipesContainer nutrition={nutrition} setNutrition={setNutrition} favorites={favorites} setFavorites={setFavorites} recipes={recipes}></RecipesContainer>
+          <NutritionContainer setNutrition={setNutrition} nutrition={nutrition}></NutritionContainer>
+          </div>
           <FavoritesContainer favorites={favorites} setFavorites={setFavorites}></FavoritesContainer>
           </div>
           }></Route>

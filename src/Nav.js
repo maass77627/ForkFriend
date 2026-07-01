@@ -7,7 +7,8 @@ function Nav() {
     return (
         <nav className="nav">
             
-            <Link to="/addingredient">add ingredient</Link>
+            <Link className="link" to="/addingredient">add ingredient</Link>
+            <Link className="link" to="/">home</Link>
             
             
 
