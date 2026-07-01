@@ -20,6 +20,7 @@ function App() {
   const [recipes, setRecipes] = useState([])
   const [favorites, setFavorites] = useState(() => { return JSON.parse(localStorage.getItem("favorites")) || []})
  const [nutrition, setNutrition] = useState([])
+ const [randomRecipes, setRandomRecipes] = useState([])
 
 // useEffect(() => {
   function getRecipes(ingredients) {
@@ -54,25 +55,27 @@ function App() {
   }, [favorites])
   
 
-// }, [])
 
-// useEffect(() => {
-//   fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random`, {
-//   headers: {
-//     "X-RapidAPI-Key": apiKey,
-//    "Content-Type": "application/json",
-//    "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
-//   }
-// })
-// .then((res) => {
-//   console.log(res.status)
-//  return res.json()
-// }) 
-// .then((json) => {
-//   console.log(json)
-// })
 
-// }, [])
+useEffect(() => {
+  // fetch('https://api.spoonacular.com/recipes/complexSearch', {
+   fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=50`, {
+  headers: {
+    "X-RapidAPI-Key": apiKey,
+   "Content-Type": "application/json",
+   "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
+  }
+})
+.then((res) => {
+  console.log(res.status)
+ return res.json()
+}) 
+.then((json) => {
+  setRandomRecipes(json.recipes)
+  console.log(json)
+})
+
+}, [])
 
 useEffect(() => {
   fetch(`http://localhost:3000/ingredients`, {
@@ -102,7 +105,7 @@ useEffect(() => {
       <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        <Route path="/allrecipes" element={<AllRecipes recipes={recipes}></AllRecipes>}></Route>
+        <Route path="/recipes" element={<AllRecipes randomRecipes={randomRecipes}></AllRecipes>}></Route>
         <Route path="/addingredient" element={<IngredientForm setIngredients={setIngredients} ingredients={ingredients}></IngredientForm>}></Route> 
          <Route path="/" element={
           <div className="main-layout">

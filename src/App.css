@@ -1,13 +1,14 @@
 .App {
   text-align: center;
   background-color: rgb(95, 242, 117);
-  font-family: 'Ariel';
-  font-weight: 200px;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
   font-size: small;
 }
 
 .title {
-  background-color: rgb(3, 123, 7);
+  background-color: rgb(20, 129, 43);
+  /* background-color: rgb(3, 123, 7); */
   border-radius: 25px;
 }
 .food {
@@ -129,9 +130,10 @@ h3 {
 }
 
 .delete-button {
+  background-color: rgb(20, 129, 43);
   float: right;
   border: none;
-  background-color: greenyellow;
+  /* background-color: greenyellow; */
 }
 
 .nav {
@@ -155,7 +157,8 @@ h3 {
 
 .footer {
   height: 200px;
-  background-color: chartreuse;
+  /* background-color: chartreuse; */
+  background-color: rgb(20, 129, 43);
 }
 
 .link {
@@ -165,7 +168,8 @@ h3 {
 
 .nutrition-container {
   width: 100%;
-  background-color: green;
+  background-color: rgb(20, 129, 43);
+  /* background-color: green; */
 }
 
 .main {
@@ -178,4 +182,26 @@ h3 {
 
 .nutrition {
   background-color: white;
+}
+
+.all-recipes{
+  display: grid;
+   grid-template-columns: repeat(7, 1fr);
+  background-color:rgb(20, 129, 43);
+}
+
+.random {
+  width: 200px;
+  font-size: 9px;
+  /* max-width: 10%; */
+
+}
+
+.random img {
+   width: 200px 
+}
+
+.random-pop {
+  background-color: aliceblue;
+  height: 200px;
 }
