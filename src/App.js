@@ -10,6 +10,7 @@ import FavoritesContainer from './FavoritesContainer';
 import Nav from "./Nav";
 import Footer from "./Footer";
 import IngredientForm from "./IngredientForm";
+import AllRecipes from './AllRecipes';
 
 function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -17,7 +18,7 @@ function App() {
   const [ingredients, setIngredients] = useState([])
   const [recipeIngredients, setRecipeIngredients] = useState([])
   const [recipes, setRecipes] = useState([])
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState(() => { return JSON.parse(localStorage.getItem("favorites")) || []})
  const [nutrition, setNutrition] = useState([])
 
 // useEffect(() => {
@@ -45,6 +46,13 @@ function App() {
   console.log(json)
 })
   }
+
+
+
+  useEffect(() => {
+     localStorage.setItem("favorites", JSON.stringify(favorites))
+  }, [favorites])
+  
 
 // }, [])
 
@@ -94,12 +102,12 @@ useEffect(() => {
       <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        
+        <Route path="/allrecipes" element={<AllRecipes recipes={recipes}></AllRecipes>}></Route>
         <Route path="/addingredient" element={<IngredientForm setIngredients={setIngredients} ingredients={ingredients}></IngredientForm>}></Route> 
          <Route path="/" element={
           <div className="main-layout">
           <Ingredients getRecipes={getRecipes} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} ingredients={ingredients}></Ingredients>
-        
+           
             <div className="main">
           <RecipesContainer nutrition={nutrition} setNutrition={setNutrition} favorites={favorites} setFavorites={setFavorites} recipes={recipes}></RecipesContainer>
           <NutritionContainer setNutrition={setNutrition} nutrition={nutrition}></NutritionContainer>

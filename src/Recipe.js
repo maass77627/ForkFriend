@@ -11,16 +11,27 @@ const apiKey = process.env.REACT_APP_SPOON_API_KEY;
 
 // const [liked, setLiked] = useState(false)
 const [recipeDetails, setRecipeDetails] = useState(null)
+const [recipeCache, setRecipeCache] = useState({})
 
 
-console.log(apiKey);
 function handleClick(id) {
+    console.log("Cache:", recipeCache);
+    if (recipeCache[id]) {
+        console.log("loaded from cache")
+        setRecipeDetails(recipeCache[id])
+        setNutrition(recipeCache[id].nutrition)
+        return
+    }
+    console.log("loaded from fetch")
     fetch(`https://api.spoonacular.com/recipes/${id}/information?includeNutrition=true&apiKey=${apiKey}`)
     .then((res) => {
         console.log(res.status)
          return res.json()})
     .then((json) => {
         console.log(json)
+
+        setRecipeCache((prev) => ({...prev, [json.id]: json}))
+
         setRecipeDetails(json)
        setNutrition(json.nutrition)
         
@@ -67,12 +78,10 @@ if (favorites.some((rec) => rec.id === id)) {
 
 
 const liked = favorites.some((reci) => reci.id === rec.id)
-// console.log(likedRec)
+
     return (
-    //     <OverlayTrigger trigger="hover" placement="top" overlay={<Tooltip id="detail-tooltip">
-    //   Click or Recipe Details
-    // </Tooltip>}>
-        <OverlayTrigger  placement="right" overlay={popover}>
+   
+        <OverlayTrigger  placement="left" overlay={popover}>
         <div role="button" onClick={() => handleClick(rec.id)} className="recipe">
               <button className="like-btn" aria-label={liked ? "Remove from favorites" : "Add to favorites"} onClick={(e) => handleLike(e, rec.id)}> 
                <i aria-hidden="true" className={liked ? "bi bi-heart-fill" : "bi bi-heart"}></i> 

@@ -27,10 +27,7 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
     
     }
 
-    // function handleChange(e) {
-    //   console.log(e.target.value)
-    //   let filteredIng = ingredients.filter((ing) => ing.category === e.target.value)
-    // }
+   
   
     const categories = ingredients.map((ing) => ing.category)
     const uniqcategories = [...new Set(categories)]
@@ -45,7 +42,7 @@ return (
   <div className="ingredient-wrap">
     <h5>Choose From Ingredients you have at home...</h5>
 
-    <form onChange={(e) => setFilter(e.target.value)}>
+    <p>Filter Ingredients:</p><form onChange={(e) => setFilter(e.target.value)}>
      <select>
       <option value="all"></option>
       {

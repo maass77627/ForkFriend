@@ -24,18 +24,22 @@ border-color: black;
 
 .ingredient-wrap {
   background-color: lightgreen;
-  /* margin: 50px;  */
-  /* max-height: 700px; */
-  max-width: 20%;
-  /* overflow: scroll; */
+   margin-right: 10px;  
+  /* max-height: 700px;  */
+  width: 40%;
+  
+  /* overflow-x: hidden; */
+ /* overflow: scroll;  */
 }
 
 .ingredient-grid{
 
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  
   gap: 10px;
-  overflow-x: hidden; 
+  max-height: 650px;
+  overflow-y: auto;   
  scrollbar-width: none;
  
 }
@@ -78,10 +82,11 @@ border-color: black;
 }
 
 .recipe {
+  margin-top: 20px;
   background-color: rgb(237, 234, 239);
   border-radius: 25px;
   font-size: 25px;
-  width: 80%;
+  width: 60%;
 
 }
 
@@ -103,14 +108,19 @@ h1,
 h2,
 h3 {
   font-weight: bold;
+  background-color: white;
 }
 
 .favorite-container {
- width: 20%;
- height: auto;
+ width: 40%;
+ margin-left: 10px;
+ /* height: auto; */
  background-color: lightgreen;
  /* background-color: darkgreen; */
  border-radius: 25px;
+ max-height: 740px;
+  overflow-y: auto;   
+ scrollbar-width: none;
 }
 
 .favorite{
@@ -134,7 +144,7 @@ h3 {
   font-weight: bold;
 }
 .popover.recipe-popover {
-  max-width: 700px !important;
+  max-width: 400px !important;
 }
 
 #detail-tooltip {
@@ -144,11 +154,13 @@ h3 {
 
 
 .footer {
+  height: 200px;
   background-color: chartreuse;
 }
 
 .link {
  margin: 20px;
+ color: black;
 }
 
 .nutrition-container {
