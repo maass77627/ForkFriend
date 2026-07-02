@@ -33,6 +33,7 @@ function handleSubmit(e) {
 
 
     return (
+        <div className="form-wrap">
         <form className="ingredient-form" onSubmit={handleSubmit}>
             <label>Name:</label>
            <input onChange={(e) => setName(e.target.value)} value={name} type="text"></input>
@@ -42,6 +43,7 @@ function handleSubmit(e) {
            <input onChange={(e) => setImage(e.target.value)} value={image} type="text"></input>
            <input  value="submit" type="submit"></input>
         </form>
+        </div>
 
     )
 }

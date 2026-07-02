@@ -40,7 +40,7 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
 
 return (
   <div className="ingredient-wrap">
-    <h5>Choose From Ingredients you have at home...</h5>
+    <h5>Choose Your Ingredients...</h5>
 
     <p>Filter Ingredients:</p><form onChange={(e) => setFilter(e.target.value)}>
      <select>

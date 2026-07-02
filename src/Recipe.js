@@ -51,7 +51,7 @@ const popover = (
           <label className="label">Cook Time:</label>
           <p>{recipeDetails.readyInMinutes}</p>
           <label className="label">Ingredients:</label>
-          <p>{recipeDetails.extendedIngredients.map((ing) => ing.name + ", ")}</p>
+          <p>{recipeDetails?.extendedIngredients?.map((ing) => ing.name + ", ")}</p>
           <label className="label">Directions:</label>
           <p> {recipeDetails.instructions}</p> 
          </>
