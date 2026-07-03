@@ -11,6 +11,8 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import IngredientForm from "./IngredientForm";
 import AllRecipes from './AllRecipes';
+// import { createContext } from "react";
+import { IngredientContext } from './context/IngredientContext';
 
 function App() {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -21,6 +23,8 @@ function App() {
   const [favorites, setFavorites] = useState(() => { return JSON.parse(localStorage.getItem("favorites")) || []})
  const [nutrition, setNutrition] = useState([])
  const [randomRecipes, setRandomRecipes] = useState([])
+
+//  export const ingredientContext = createContext()
 
 // useEffect(() => {
   function getRecipes(ingredients) {
@@ -103,13 +107,15 @@ useEffect(() => {
       <h1 className="title">Fork Friend</h1>
 
       <BrowserRouter>
+      <IngredientContext.Provider value={{ingredients, setIngredients}}>
       <Nav></Nav>
       <Routes>
+        
         <Route path="/recipes" element={<AllRecipes randomRecipes={randomRecipes}></AllRecipes>}></Route>
-        <Route path="/addingredient" element={<IngredientForm setIngredients={setIngredients} ingredients={ingredients}></IngredientForm>}></Route> 
+        <Route path="/addingredient" element={<IngredientForm ></IngredientForm>}></Route> 
          <Route path="/" element={
           <div className="main-layout">
-          <Ingredients getRecipes={getRecipes} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} ingredients={ingredients}></Ingredients>
+          <Ingredients getRecipes={getRecipes} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} ></Ingredients>
            
             <div className="main">
           <RecipesContainer nutrition={nutrition} setNutrition={setNutrition} favorites={favorites} setFavorites={setFavorites} recipes={recipes}></RecipesContainer>
@@ -118,7 +124,9 @@ useEffect(() => {
           <FavoritesContainer favorites={favorites} setFavorites={setFavorites}></FavoritesContainer>
           </div>
           }></Route>
+          
       </Routes>
+      </IngredientContext.Provider>
       </BrowserRouter>
       <Footer></Footer>
     </div>

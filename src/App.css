@@ -245,14 +245,18 @@ h5
 }
 
 .random {
+  /* background-color: white; */
   width: 200px;
   font-size: 12px;
+  border: 2px;
+  border-style: solid;
+  border-color: black;
   /* max-width: 10%; */
 
 }
 
 .random img {
-   width: 200px;
+   width: 180px;
    border-radius: 5px;
 
 }

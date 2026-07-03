@@ -1,12 +1,15 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useMemo } from "react";
+import { useContext } from "react";
+import { IngredientContext } from "./context/IngredientContext";
 
-function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getRecipes}) {
-  console.log(ingredients)
-    // const [selectedIngredients, setSelectedIngredients] = useState([])
+function Ingredients({recipeIngredients, setRecipeIngredients, getRecipes}) {
+  
     const [selected, setSelected] = useState([])
     const [filter, setFilter] = useState("all")
+    const { ingredients } = useContext(IngredientContext)
    
     const getImage = (image) => {
         return `https://img.spoonacular.com/ingredients_100x100/${image}`
@@ -27,16 +30,30 @@ function Ingredients({ingredients, recipeIngredients, setRecipeIngredients, getR
     
     }
 
-   
+   const uniqcategories = useMemo(() => {
+      return [...new Set(ingredients.map((ing) => ing.category))]
+
+   }, [ingredients])
   
-    const categories = ingredients.map((ing) => ing.category)
-    const uniqcategories = [...new Set(categories)]
-    let filteredIng = ingredients.filter((ing) => {
-      if (filter === "all") {
-        return ing
-      }
-      return ing.category === filter
-    })
+    // const categories = ingredients.map((ing) => ing.category)
+    // const uniqcategories = [...new Set(categories)]
+    //
+
+    const filteredIng = useMemo(() => {
+      return ingredients.filter((ing) => {
+        if (filter === "all") {
+          return ing
+        }
+        return ing.category === filter
+      })
+
+    }, [ingredients, filter])
+    // let filteredIng = ingredients.filter((ing) => {
+    //   if (filter === "all") {
+    //     return ing
+    //   }
+    //   return ing.category === filter
+    // })
 
 return (
   <div className="ingredient-wrap">
@@ -48,7 +65,7 @@ return (
       {
         
         uniqcategories.map((cat) =>(
-          <option value={cat}>{cat}</option>
+          <option key={cat.id} value={cat}>{cat}</option>
         ))
       }
      </select>

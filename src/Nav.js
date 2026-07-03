@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import React from "react";
 
 function Nav() {
 
@@ -17,4 +18,4 @@ function Nav() {
     )
 }
 
-export default Nav
+export default React.memo(Nav)

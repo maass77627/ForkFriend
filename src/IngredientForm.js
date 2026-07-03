@@ -1,12 +1,17 @@
 
+import React from "react";
 import { useState } from "react";
 import { OffcanvasTitle } from "react-bootstrap";
+import { useContext } from "react";
+import { IngredientContext } from "./context/IngredientContext"
 
-function IngredientForm({ingredients, setIngredients}) {
-const [name, setName] = useState()
+function IngredientForm() {
+const {ingredients, setIngredients} = useContext(IngredientContext)
+// function IngredientForm({ingredients, setIngredients}) {
+const [name, setName] = useState("")
 // const [date, setDate] = useState()
-const [category, setCategory] = useState()
-const [image, setImage] = useState()
+const [category, setCategory] = useState("")
+const [image, setImage] = useState("")
 
 
 function handleSubmit(e) {
@@ -26,6 +31,10 @@ function handleSubmit(e) {
     .then((json) => {
         console.log(json)
         setIngredients( (prev) => [...prev, json])
+
+         setName("");
+         setCategory("");
+         setImage("");
     })
 
 }

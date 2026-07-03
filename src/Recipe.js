@@ -89,7 +89,7 @@ const liked = favorites.some((reci) => reci.id === rec.id)
 
           
           <h5>{rec.title}</h5>
-           <OverlayTrigger trigger="hover" placement="top" overlay={<Tooltip id="detail-tooltip">
+           <OverlayTrigger trigger={["hover", "focus"]} placement="top" overlay={<Tooltip id="detail-tooltip">
       Click For Recipe Details
     </Tooltip>}>
           <img src={rec.image}></img>
